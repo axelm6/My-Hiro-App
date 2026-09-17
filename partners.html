@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For universities — Hiro</title>
+<meta name="description" content="Hiro promotes your international programs to a vetted, tailored base of partner schools abroad, without changing how your admissions process works.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F8F7F4;
+  --surface: #FFFFFF;
+  --surface-2: #F1EEE7;
+  --text: #1B2E4B;
+  --text-muted: #51637C;
+  --text-faint: #8A9BB0;
+  --border: #E1DFD6;
+  --border-strong: #C5CDD8;
+  --accent: #E8581A;
+  --accent-deep: #993C1D;
+  --accent-soft: #FBE3D6;
+  --nav-bg: rgba(248, 247, 244, 0.86);
+  --dark: #0D1B2A;
+  --dark-surface: #16283C;
+  --shadow: 0 1px 2px rgba(27, 46, 75, 0.05);
+  --shadow-lg: 0 20px 50px -20px rgba(13, 27, 42, 0.35);
+}
+:root[data-theme="dark"] {
+  --bg: #0D1B2A;
+  --surface: #16283C;
+  --surface-2: #1B3049;
+  --text: #ECEFF3;
+  --text-muted: #A3B3C6;
+  --text-faint: #64768C;
+  --border: #24344A;
+  --border-strong: #33465F;
+  --accent: #FF8552;
+  --accent-deep: #FFC3A3;
+  --accent-soft: #2E2115;
+  --nav-bg: rgba(13, 27, 42, 0.86);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 24px 60px -20px rgba(0, 0, 0, 0.55);
+}
+@media (prefers-reduced-motion: reduce) { *{transition:none!important;animation:none!important;} }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif;
+  font-size: 16px; line-height: 1.6;
+}
+h1,h2,h3 { font-family: Georgia, "Times New Roman", serif; color: var(--text); margin: 0; text-wrap: balance; }
+a { color: inherit; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+.eyebrow { font-size: 12.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-deep); }
+.eyebrow.on-dark { color: var(--accent); }
+
+/* ---- nav ---- */
+.nav { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(10px); background: var(--nav-bg); border-bottom: 1px solid var(--border); }
+.nav-row { display: flex; align-items: center; justify-content: space-between; padding: 16px 32px; max-width: 1180px; margin: 0 auto; gap: 24px; }
+.wordmark { font-family: Georgia, serif; font-weight: 700; font-size: 22px; letter-spacing: -.01em; flex: none; text-decoration: none; }
+.nav-links { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; flex: 1; justify-content: center; flex-wrap: wrap; }
+.nav-links a { text-decoration: none; font-size: 14.5px; color: var(--text-muted); font-weight: 500; }
+.nav-links a[aria-current="page"] { color: var(--text); font-weight: 600; }
+.nav-cta { display: flex; align-items: center; gap: 14px; flex: none; }
+.icon-btn { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--border-strong); background: var(--surface); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-muted); }
+.menu-btn { display: none; }
+
+/* ---- buttons ---- */
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border-radius: 999px; font-size: 15px; font-weight: 600; text-decoration: none; border: 1px solid transparent; cursor: pointer; white-space: nowrap; }
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-secondary { background: transparent; color: var(--text); border-color: var(--border-strong); }
+.btn-primary.small, .btn-secondary.small { padding: 9px 16px; font-size: 13.5px; }
+
+/* ---- hero ---- */
+.hero { padding: 72px 0 60px; }
+.hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 48px; align-items: center; }
+.hero h1 { font-size: clamp(38px, 4.6vw, 58px); font-weight: 700; line-height: 1.05; letter-spacing: -.02em; margin-top: 14px; }
+.hero .sub { font-size: 18px; color: var(--text-muted); max-width: 46ch; margin-top: 18px; line-height: 1.55; }
+.hero-ctas { display: flex; gap: 14px; margin-top: 30px; flex-wrap: wrap; }
+.trust-row { display: flex; gap: 22px; flex-wrap: wrap; margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-faint); }
+.trust-row span { display: inline-flex; align-items: center; gap: 7px; }
+.dot-sm { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex: none; }
+
+/* ---- phone stack ---- */
+.phones { position: relative; height: 480px; }
+.phone { position: absolute; width: 190px; border-radius: 26px; overflow: hidden; box-shadow: var(--shadow-lg); border: 6px solid var(--dark); background: var(--dark); }
+.phone img { display: block; width: 100%; }
+.phone.p1 { left: 8%;  top: 0;   width: 210px; z-index: 2; }
+.phone.p2 { left: 44%; top: 60px; width: 210px; z-index: 3; }
+.phone.p3 { left: 58%; top: 8px;  width: 190px; z-index: 1; opacity: .9; }
+
+/* ---- sections ---- */
+section { padding: 64px 0; }
+.section-head { max-width: 640px; margin-bottom: 40px; }
+.section-head h2 { font-size: clamp(26px, 3vw, 34px); margin-top: 10px; }
+.section-head p { color: var(--text-muted); font-size: 16px; margin-top: 12px; line-height: 1.6; }
+.on-dark { background: var(--dark); color: #fff; }
+.on-dark h2, .on-dark h3 { color: #fff; }
+.on-dark .section-head p { color: var(--text-faint, #A3B3C6); }
+.on-surface { background: var(--surface-2); }
+
+/* ---- feature grid ---- */
+.grid-6 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+.feature { background: var(--surface); padding: 26px 24px; }
+.feature .ic { width: 34px; height: 34px; border-radius: 9px; background: var(--accent-soft); color: var(--accent-deep); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+.feature h3 { font-size: 16.5px; margin-bottom: 8px; }
+.feature p { font-size: 14px; color: var(--text-muted); line-height: 1.5; margin: 0; }
+.feature .tag { display: block; margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--border); font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--text-faint); }
+
+/* ---- two-state / two-col ---- */
+.states { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-top: 8px; }
+.state-card { background: var(--surface); padding: 30px 28px; }
+.state-card .k { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-faint); }
+.state-card h3 { font-size: 22px; margin: 10px 0 6px; }
+.state-card p { color: var(--text-muted); font-size: 15px; line-height: 1.55; margin: 0; }
+
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+.split h2 { font-size: clamp(24px,3vw,32px); line-height: 1.2; }
+.numbered { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.numbered li { display: grid; grid-template-columns: 34px 1fr; gap: 16px; padding: 18px 0; border-top: 1px solid var(--border); }
+.numbered li:first-child { border-top: none; }
+.numbered .n { font-family: Georgia, serif; font-weight: 700; color: var(--accent); font-size: 15px; }
+.numbered h4 { margin: 0 0 5px; font-size: 15.5px; }
+.numbered p { margin: 0; font-size: 14px; color: var(--text-muted); line-height: 1.55; }
+
+.badge-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
+.badge { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--border-strong); background: var(--surface); font-size: 13.5px; color: var(--text-muted); }
+
+/* ---- cta band ---- */
+.cta-band { background: var(--dark); color: #fff; border-radius: 20px; padding: 52px 48px; display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+.cta-band h2 { color: #fff; font-size: clamp(24px,3vw,32px); }
+.cta-band p { color: #A3B3C6; margin-top: 8px; font-size: 15px; }
+
+/* ---- footer ---- */
+footer { border-top: 1px solid var(--border); padding: 56px 0 34px; }
+.foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px; }
+.foot-brand p { color: var(--text-muted); font-size: 14px; max-width: 34ch; margin-top: 12px; line-height: 1.55; }
+.foot-col h4 { font-size: 11.5px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--text-faint); margin: 0 0 14px; }
+.foot-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.foot-col a { text-decoration: none; font-size: 14.5px; color: var(--text-muted); }
+.foot-bottom { margin-top: 40px; padding-top: 22px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; align-items: flex-start; }
+.foot-legal { font-size: 12.5px; color: var(--text-faint); line-height: 1.6; max-width: 74ch; }
+.foot-meta { font-size: 12.5px; color: var(--text-faint); white-space: nowrap; }
+
+@media (max-width: 900px) {
+  .hero-grid, .split { grid-template-columns: 1fr; }
+  .phones { height: 360px; margin-top: 20px; }
+  .grid-6, .states { grid-template-columns: 1fr; }
+  .foot-grid { grid-template-columns: 1fr 1fr; }
+  .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-row">
+    <a href="index.html" class="wordmark">hiro</a>
+    <ul class="nav-links"><a href="index.html">Overview</a><a href="roadmap.html">Roadmap</a><a href="partners.html" aria-current="page">For universities</a><a href="security.html">Security</a><a href="about.html">About</a></ul>
+    <div class="nav-cta">
+      <button class="icon-btn" onclick="hiroToggleTheme()" aria-label="Toggle dark mode" title="Toggle dark mode"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"/></svg></button>
+      <a href="early-access.html" class="btn btn-primary small">Get early access</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">For international programs offices</div>
+    <h1 style="max-width:18ch">Your programs, in front of the students already looking for them.</h1>
+    <p class="sub">Nothing about how you run your program changes. What changes is
+      whether a student overseas ever sees it in the first place, and whether she
+      arrives already understanding it.</p>
+    <div class="hero-ctas"><a href="mailto:axel.martinez@livefresh.ai" class="btn btn-primary">Talk to our partnerships team <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+  </div>
+</header>
+
+<section class="on-surface">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">The waterfall</div>
+      <h2>Every partner you open makes the next one easier.</h2>
+      <p>Start with one partner school abroad. The material built for the first one,
+        the pathway page, the requirements, the outcomes it produces, is the same
+        material that makes the second one cost a fraction of the first.</p>
+    </div>
+    <div class="grid-6" style="grid-template-columns:repeat(3,1fr)">
+      <div class="feature"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M9 14l-2 7 5-3 5 3-2-7"/></svg></div><h3>In-network, not just listed</h3>
+        <p>Your program shows first, and marked, to students at any school you already
+          have a partnership with. Everyone else still sees it too, just without the
+          badge.</p></div>
+      <div class="feature"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M9.5 12h5M9.5 15.5h5"/></svg></div><h3>Outcomes you can hand back</h3>
+        <p>What happened to the students a partner sent you, by name and date. Something
+          neither side can produce today.</p></div>
+      <div class="feature"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 4 6 4 9s-1.5 6.3-4 9c-2.5-2.7-4-6-4-9s1.5-6.3 4-9z"/></svg></div><h3>Your admissions, unchanged</h3>
+        <p>Hiro hands off to your own site or your DSO to actually apply. Nothing about
+          your process moves.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap split">
+    <div>
+      <div class="eyebrow">What stays yours</div>
+      <h2>You lead every introduction. We supply the platform.</h2>
+      <p style="color:var(--text-muted);margin-top:14px;line-height:1.6">This isn't Hiro
+        becoming a recruitment agency. Your relationship, your brand, your academic
+        offer, all stay exactly where they are. We're the pathway page a student lands
+        on before she ever applies, and the record of what happened after.</p>
+      <div class="badge-row">
+        <span class="badge"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 7"/></svg> You lead every introduction</span>
+        <span class="badge"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 7"/></svg> Your admissions process, unchanged</span>
+      </div>
+    </div>
+    <ul class="numbered">
+      <li><span class="n">01</span><div><h4>Give us one introduction</h4><p>A single
+        partner school abroad. You lead it, we build the material with you.</p></div></li>
+      <li><span class="n">02</span><div><h4>Students see you first</h4><p>In-network,
+        badged, with real requirements matched against what they've uploaded.</p></div></li>
+      <li><span class="n">03</span><div><h4>They apply through you</h4><p>Hiro hands off
+        to your site or your DSO. Nothing changes in how someone actually enrolls.</p></div></li>
+      <li><span class="n">04</span><div><h4>You get the outcomes back</h4><p>What
+        happened to the students you sent each other, the thing neither side has
+        today.</p></div></li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="cta-band">
+      <div><h2>Start with one partner.</h2><p>The material built for the first one is the material for every one after it.</p></div>
+      <a href="mailto:axel.martinez@livefresh.ai" class="btn btn-primary">Talk to our partnerships team <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</section>
+
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="index.html" class="wordmark">hiro</a>
+        <p>The pathway platform for international students. One profile, from choosing a
+          program abroad to the job and the visa on the other side.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Product</h4>
+        <ul><li><a href="index.html">Overview</a></li><li><a href="roadmap.html">Roadmap</a></li></ul>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <ul><li><a href="about.html">About</a></li><li><a href="partners.html">For universities</a></li><li><a href="mailto:axel.martinez@livefresh.ai">Contact</a></li></ul>
+      </div>
+      <div class="foot-col">
+        <h4>Trust</h4>
+        <ul><li><a href="security.html">Security &amp; privacy</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p class="foot-legal">Hiro is a pathway and career-planning tool for international
+        students. Hiro is not an immigration attorney, a Designated School Official, or an
+        educational institution, and nothing on this site or in the app is legal,
+        immigration, or academic advice. Visa filing history, program requirements, and
+        sponsorship data shown are drawn from public records and documented school
+        requirements, never presented as a promise or a likelihood of any outcome. Confirm
+        eligibility, deadlines, and requirements with your school's DSO and, where
+        relevant, immigration counsel.</p>
+      <p class="foot-meta">&copy; 2026 Hiro, a Livefresh product &middot; prototype stage,
+        not yet available for download</p>
+    </div>
+  </div>
+</footer>
+<script>
+(function(){
+  var root = document.documentElement;
+  var stored = null;
+  try { stored = localStorage.getItem('hiro-theme'); } catch(e) {}
+  if (stored) root.setAttribute('data-theme', stored);
+  window.hiroToggleTheme = function(){
+    var cur = root.getAttribute('data-theme');
+    var next = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('hiro-theme', next); } catch(e) {}
+  };
+})();
+</script>
+</body>
+</html>
