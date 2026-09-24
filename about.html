@@ -23,7 +23,7 @@
 .dash-stat .l { font-size:12.5px; color:var(--text-muted); margin-top:4px; line-height:1.4; }
 .dash-body { display:grid; grid-template-columns:1.1fr 1fr; }
 .dash-programs { padding:20px 22px; border-right:1px solid var(--border); }
-.dash-programs h4 { font-size:12px; font-weight:700; letter-spacing:.05em; text-transform:uppercase;
+.dash-programs h4 { font-size:13px; font-weight:600; letter-spacing:0;
   color:var(--text-faint); margin:0 0 14px; }
 .dash-prow { display:flex; align-items:center; gap:12px; padding:8px 0; }
 .dash-prow .pname { flex:1; font-size:13.5px; color:var(--text); }
@@ -31,7 +31,7 @@
 .dash-prow .pbar i { display:block; height:100%; background:var(--accent); border-radius:4px; }
 .dash-prow .pn { font-size:12.5px; color:var(--text-faint); width:66px; text-align:right; }
 .dash-quote { padding:20px 22px; display:flex; flex-direction:column; justify-content:center; gap:10px; }
-.dash-quote .qtag { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--accent-deep); }
+.dash-quote .qtag { font-family:Georgia,serif; font-style:italic; font-size:13.5px; font-weight:400; color:var(--accent-deep); }
 .dash-quote p { font-family:Georgia,serif; font-size:16px; line-height:1.4; color:var(--text); margin:0; }
 .dash-quote .qn { font-size:12px; color:var(--text-faint); }
 .dash-foot { padding:14px 22px; border-top:1px solid var(--border); font-size:12.5px; color:var(--text-faint); }
@@ -62,7 +62,7 @@
 .compare-col { background:var(--surface); padding:26px 26px 22px; display:flex; flex-direction:column; }
 .compare-col.win { background:var(--dark); }
 .compare-col.win * { color:#fff; }
-.compare-col .ctag { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--text-faint); }
+.compare-col .ctag { font-size:13px; font-weight:600; letter-spacing:0; color:var(--text-faint); }
 .compare-col.win .ctag { color:var(--accent); }
 .compare-col h3 { font-size:20px; margin-top:8px; }
 .compare-line { display:flex; justify-content:space-between; gap:10px; padding:10px 0; border-top:1px solid var(--border); font-size:13.5px; }
@@ -114,7 +114,7 @@ body { margin:0; background:var(--bg); color:var(--text);
 h1,h2,h3 { font-family:Georgia,"Times New Roman",serif; color:var(--text); margin:0; text-wrap:balance; }
 a { color: inherit; }
 .wrap { max-width:1180px; margin:0 auto; padding:0 32px; }
-.eyebrow { font-size:12.5px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--accent-deep); }
+.eyebrow { font-family:Georgia,serif; font-style:italic; font-size:15.5px; font-weight:400; letter-spacing:0; color:var(--accent-deep); margin-bottom:2px; }
 
 .nav { position:sticky; top:0; z-index:50; backdrop-filter:blur(10px); background:var(--nav-bg); border-bottom:1px solid var(--border); }
 .nav-row { display:flex; align-items:center; justify-content:space-between; padding:18px 32px; max-width:1180px; margin:0 auto; gap:24px; }
@@ -271,6 +271,7 @@ footer { border-top:1px solid var(--border); padding:56px 0 34px; }
 
 
 
+
 <footer>
   <div class="wrap">
     <div class="foot-grid">
@@ -301,8 +302,8 @@ footer { border-top:1px solid var(--border); padding:56px 0 34px; }
         requirements, never presented as a promise or a likelihood of any outcome. Confirm
         eligibility, deadlines, and requirements with your school's DSO and, where
         relevant, immigration counsel.</p>
-      <p class="foot-meta">&copy; 2026 Hiro, a Livefresh product &middot; prototype stage,
-        not yet available for download</p>
+      <p class="foot-meta">&copy; 2026 Hiro, a Livefresh product. Prototype stage,
+        not yet available for download.</p>
     </div>
   </div>
 </footer>
