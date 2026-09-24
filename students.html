@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For students — Hiro</title>
+<meta name="description" content="The whole journey, from choosing a program abroad to asking for sponsorship, plus a live preview of the pathway map.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+.benefits { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:16px; overflow:hidden; margin-top: 8px; }
+.benefit-card { background:var(--surface); padding:34px 28px; display:flex; flex-direction:column; gap:12px; }
+.benefit-card .ic { width:40px; height:40px; border-radius:10px; background:var(--accent-soft); color:var(--accent-deep); display:flex; align-items:center; justify-content:center; }
+.benefit-card h3 { font-size:19px; }
+.benefit-card p { font-size:14.5px; color:var(--text-muted); line-height:1.55; flex:1; margin:0; }
+.benefit-card a.more { font-size:13.5px; font-weight:600; color:var(--accent-deep); text-decoration:none; display:inline-flex; align-items:center; gap:6px; margin-top:2px; }
+@media (max-width:900px) { .benefits { grid-template-columns:1fr; } }
+
+:root {
+  --bg: #F8F7F4; --surface: #FFFFFF; --surface-2: #F1EEE7;
+  --text: #1B2E4B; --text-muted: #51637C; --text-faint: #8A9BB0;
+  --border: #E1DFD6; --border-strong: #C5CDD8;
+  --accent: #E8581A; --accent-deep: #993C1D; --accent-soft: #FBE3D6;
+  --nav-bg: rgba(248, 247, 244, 0.86);
+  --dark: #0D1B2A; --dark-surface: #16283C;
+  --shadow: 0 1px 2px rgba(27, 46, 75, 0.05);
+  --shadow-lg: 0 20px 50px -20px rgba(13, 27, 42, 0.35);
+  --company: #2E5580;
+}
+:root[data-theme="dark"] {
+  --bg: #0D1B2A; --surface: #16283C; --surface-2: #1B3049;
+  --text: #ECEFF3; --text-muted: #A3B3C6; --text-faint: #64768C;
+  --border: #24344A; --border-strong: #33465F;
+  --accent: #FF8552; --accent-deep: #FFC3A3; --accent-soft: #2E2115;
+  --nav-bg: rgba(13, 27, 42, 0.86);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 24px 60px -20px rgba(0, 0, 0, 0.55);
+  --company: #7FA8D4;
+}
+@media (prefers-reduced-motion: reduce) { *{transition:none!important;animation:none!important;} }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin:0; background:var(--bg); color:var(--text);
+  font-family:"IBM Plex Sans",-apple-system,"Segoe UI",sans-serif; font-size:16px; line-height:1.6; }
+h1,h2,h3 { font-family:Georgia,"Times New Roman",serif; color:var(--text); margin:0; text-wrap:balance; }
+a { color: inherit; }
+.wrap { max-width:1180px; margin:0 auto; padding:0 32px; }
+.eyebrow { font-size:12.5px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--accent-deep); }
+
+.nav { position:sticky; top:0; z-index:50; backdrop-filter:blur(10px); background:var(--nav-bg); border-bottom:1px solid var(--border); }
+.nav-row { display:flex; align-items:center; justify-content:space-between; padding:18px 32px; max-width:1180px; margin:0 auto; gap:24px; }
+.wordmark { font-family:Georgia,serif; font-weight:700; font-size:28px; letter-spacing:-.01em; flex:none; text-decoration:none; }
+.nav-links { display:flex; gap:26px; list-style:none; margin:0; padding:0; flex:1; justify-content:center; flex-wrap:wrap; }
+.nav-links a { text-decoration:none; font-size:14.5px; color:var(--text-muted); font-weight:500; }
+.nav-links a[aria-current="page"] { color:var(--text); font-weight:600; }
+.nav-cta { display:flex; align-items:center; gap:14px; flex:none; }
+.icon-btn { width:34px; height:34px; border-radius:50%; border:1px solid var(--border-strong); background:var(--surface); display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--text-muted); }
+
+.btn { display:inline-flex; align-items:center; gap:8px; padding:12px 22px; border-radius:999px; font-size:15px; font-weight:600; text-decoration:none; border:1px solid transparent; cursor:pointer; white-space:nowrap; }
+.btn-primary { background:var(--accent); color:#fff; }
+.btn-secondary { background:transparent; color:var(--text); border-color:var(--border-strong); }
+.btn-primary.small,.btn-secondary.small { padding:9px 16px; font-size:13.5px; }
+
+.hero { padding:60px 0 52px; }
+.hero-grid { display:grid; grid-template-columns:1.05fr .95fr; gap:48px; align-items:center; }
+.hero h1 { font-size:clamp(36px,4.4vw,54px); font-weight:700; line-height:1.06; letter-spacing:-.02em; margin-top:14px; }
+.hero .sub { font-size:17px; color:var(--text-muted); max-width:46ch; margin-top:16px; line-height:1.55; }
+.hero-ctas { display:flex; gap:14px; margin-top:26px; flex-wrap:wrap; }
+.trust-row { display:flex; gap:22px; flex-wrap:wrap; margin-top:24px; padding-top:18px; border-top:1px solid var(--border); font-size:13px; color:var(--text-faint); }
+.trust-row span { display:inline-flex; align-items:center; gap:7px; }
+.dot-sm { width:5px; height:5px; border-radius:50%; background:var(--accent); flex:none; }
+
+.phones { position:relative; height:460px; }
+.phone { position:absolute; width:190px; border-radius:26px; overflow:hidden; box-shadow:var(--shadow-lg); border:6px solid var(--dark); background:var(--dark); }
+.phone img { display:block; width:100%; }
+.phone.p1 { left:8%; top:0; width:200px; z-index:2; }
+.phone.p2 { left:44%; top:56px; width:200px; z-index:3; }
+.phone.p3 { left:58%; top:6px; width:180px; z-index:1; opacity:.9; }
+
+section { padding:60px 0; }
+.section-head { max-width:640px; margin-bottom:36px; }
+.section-head h2 { font-size:clamp(26px,3vw,34px); margin-top:10px; }
+.section-head p { color:var(--text-muted); font-size:16px; margin-top:12px; line-height:1.6; }
+.on-dark { background:var(--dark); color:#fff; }
+.on-dark h2,.on-dark h3 { color:#fff; }
+.on-dark .section-head p { color:#A3B3C6; }
+.on-surface { background:var(--surface-2); }
+
+.grid-6 { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:14px; overflow:hidden; }
+.feature { background:var(--surface); padding:26px 24px; }
+.feature .ic { width:34px; height:34px; border-radius:9px; background:var(--accent-soft); color:var(--accent-deep); display:flex; align-items:center; justify-content:center; margin-bottom:16px; }
+.feature h3 { font-size:16.5px; margin-bottom:8px; }
+.feature p { font-size:14px; color:var(--text-muted); line-height:1.5; margin:0; }
+.feature .tag { display:block; margin-top:14px; padding-top:12px; border-top:1px dashed var(--border); font-size:11px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--text-faint); }
+
+.states { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); border-radius:14px; overflow:hidden; margin-top:8px; }
+.state-card { background:var(--surface); padding:30px 28px; }
+.state-card .k { font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text-faint); }
+.state-card h3 { font-size:22px; margin:10px 0 6px; }
+.state-card p { color:var(--text-muted); font-size:15px; line-height:1.55; margin:0; }
+
+.split { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start; }
+.split h2 { font-size:clamp(24px,3vw,32px); line-height:1.2; }
+.numbered { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+.numbered li { display:grid; grid-template-columns:34px 1fr; gap:16px; padding:18px 0; border-top:1px solid var(--border); }
+.numbered li:first-child { border-top:none; }
+.numbered .n { font-family:Georgia,serif; font-weight:700; color:var(--accent); font-size:15px; }
+.numbered h4 { margin:0 0 5px; font-size:15.5px; }
+.numbered p { margin:0; font-size:14px; color:var(--text-muted); line-height:1.55; }
+
+.badge-row { display:flex; gap:12px; flex-wrap:wrap; margin-top:26px; }
+.badge { display:inline-flex; align-items:center; gap:8px; padding:9px 16px; border-radius:999px; border:1px solid var(--border-strong); background:var(--surface); font-size:13.5px; color:var(--text-muted); }
+
+.cta-band { background:var(--dark); color:#fff; border-radius:20px; padding:52px 48px; display:flex; align-items:center; justify-content:space-between; gap:32px; flex-wrap:wrap; }
+.cta-band h2 { color:#fff; font-size:clamp(24px,3vw,32px); }
+.cta-band p { color:#A3B3C6; margin-top:8px; font-size:15px; }
+
+footer { border-top:1px solid var(--border); padding:56px 0 34px; }
+.foot-grid { display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:32px; }
+.foot-brand p { color:var(--text-muted); font-size:14px; max-width:34ch; margin-top:12px; line-height:1.55; }
+.foot-brand .wordmark { font-size:22px; }
+.foot-col h4 { font-size:11.5px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--text-faint); margin:0 0 14px; }
+.foot-col ul { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
+.foot-col a { text-decoration:none; font-size:14.5px; color:var(--text-muted); }
+.foot-bottom { margin-top:40px; padding-top:22px; border-top:1px solid var(--border); display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap; align-items:flex-start; }
+.foot-legal { font-size:12.5px; color:var(--text-faint); line-height:1.6; max-width:74ch; }
+.foot-meta { font-size:12.5px; color:var(--text-faint); white-space:nowrap; }
+
+@media (max-width:900px) {
+  .hero-grid,.split { grid-template-columns:1fr; }
+  .phones { height:360px; margin-top:20px; }
+  .grid-6,.states { grid-template-columns:1fr; }
+  .foot-grid { grid-template-columns:1fr 1fr; }
+  .nav-links { display:none; }
+}
+</style>
+<style>.tl-wrap{overflow-x:auto;margin:4px -32px 0;padding:10px 32px 4px}
+.timeline{display:grid;grid-template-columns:repeat(5,minmax(190px,1fr));
+  grid-template-rows:minmax(140px,auto) 32px minmax(120px,auto);column-gap:14px;min-width:1040px}
+.tl-line{grid-row:2;grid-column:1/-1;align-self:center;height:2px;background:var(--border-strong)}
+.tl-node{grid-row:2;align-self:center;justify-self:center;z-index:2;width:34px;height:34px;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-family:Georgia,serif;font-weight:700;font-size:15px;color:#fff;
+  box-shadow:0 0 0 4px var(--bg)}
+.tl-node.student{background:var(--text)} .tl-node.professional{background:var(--accent)}
+.tl-node.business{background:var(--text-faint)} .tl-node.company{background:var(--company)}
+.tl-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;
+  padding:14px 16px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:7px;align-self:end}
+.tl-card.bottom{align-self:start}
+.tl-title{font-family:Georgia,serif;font-weight:700;font-size:15px;line-height:1.25}
+.tl-points{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px}
+.tl-points li{font-size:12.5px;line-height:1.45;color:var(--text-muted);padding-left:12px;position:relative}
+.tl-points li::before{content:"";position:absolute;left:0;top:6px;width:4px;height:4px;border-radius:50%;background:var(--text-faint)}
+.tl-persona{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-faint)}
+.legend{display:flex;flex-wrap:wrap;gap:18px;align-items:center;font-size:13px;color:var(--text-muted);margin-bottom:6px}
+.legend-item{display:inline-flex;align-items:center;gap:7px}
+.dot{width:9px;height:9px;border-radius:50%;flex:none}
+.dot.business{background:var(--text-faint)} .dot.student{background:var(--text)}
+.dot.professional{background:var(--accent)} .dot.company{background:var(--company)}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+.map-section .wrap { max-width: 1180px; }
+.map-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+  overflow: hidden; box-shadow: var(--shadow); }
+.map-controls { display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
+  padding: 18px 20px; border-bottom: 1px solid var(--border); }
+.seg { display: inline-flex; background: var(--surface-2); border-radius: 10px; padding: 3px; gap: 2px; }
+.seg button { border: none; background: transparent; padding: 8px 14px; border-radius: 8px;
+  font-size: 13.5px; font-weight: 600; color: var(--text-muted); cursor: pointer;
+  font-family: inherit; }
+.seg button.active { background: var(--surface); color: var(--text); box-shadow: var(--shadow); }
+.seg.mode button.active { background: var(--accent); color: #fff; box-shadow: none; }
+.map-controls select { padding: 9px 14px; border-radius: 8px; border: 1px solid var(--border-strong);
+  background: var(--surface); color: var(--text); font-size: 13.5px; font-family: inherit; }
+.map-controls .spacer { flex: 1; }
+.gate-note { display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: var(--text-faint); }
+.map-body { display: grid; grid-template-columns: 1fr 300px; }
+#hiro-map { height: 440px; width: 100%; }
+.map-list { border-left: 1px solid var(--border); max-height: 440px; overflow-y: auto; }
+.map-list-item { padding: 14px 18px; border-bottom: 1px solid var(--border); cursor: pointer; }
+.map-list-item:hover { background: var(--surface-2); }
+.map-list-item .name { font-size: 14px; font-weight: 600; color: var(--text); }
+.map-list-item .meta { font-size: 12.5px; color: var(--text-muted); margin-top: 3px; }
+.map-list-item .sponsor-yes { display: inline-flex; align-items: center; gap: 5px; margin-top: 6px;
+  font-size: 11px; font-weight: 700; letter-spacing: .03em; color: #1a7a4c; background: #E4F5EC;
+  padding: 3px 9px; border-radius: 999px; }
+.map-list-item .sponsor-no { display: inline-block; margin-top: 6px; font-size: 11px; color: var(--text-faint); }
+.map-foot { padding: 14px 20px; border-top: 1px solid var(--border); font-size: 12.5px;
+  color: var(--text-faint); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.lf-pin { display: flex; align-items: center; justify-content: center; width: 26px; height: 26px;
+  border-radius: 50% 50% 50% 0; transform: rotate(-45deg); border: 2px solid #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,.35); }
+.lf-pin.school { background: #1B2E4B; }
+.lf-pin.job { background: #E8581A; }
+.lf-pin.job.sponsor { background: #14895C; }
+.hiro-popup h4 { margin: 0 0 4px; font-family: Georgia, serif; font-size: 15px; color: #1B2E4B; }
+.hiro-popup .pmeta { font-size: 12.5px; color: #51637C; margin-bottom: 8px; }
+.hiro-popup .prow { font-size: 12.5px; color: #1B2E4B; padding: 3px 0; }
+.hiro-popup .badge-sponsor { display: inline-block; margin-top: 6px; font-size: 11px; font-weight: 700;
+  color: #1a7a4c; background: #E4F5EC; padding: 3px 9px; border-radius: 999px; }
+.hiro-popup .badge-none { display: inline-block; margin-top: 6px; font-size: 11px; color: #8A9BB0; }
+@media (max-width: 760px) {
+  .map-body { grid-template-columns: 1fr; }
+  .map-list { border-left: none; border-top: 1px solid var(--border); max-height: 260px; }
+  #hiro-map { height: 320px; }
+}
+</style>
+
+<script>
+(function(){
+  var PROGRAMS = [
+    {n:"Data Analytics ACP", school:"Harborview Institute", state:"CA", lat:33.68, lon:-117.82, path:"Data Analyst", dur:"2 quarters", cost:"$14,300", course:"SQL, Tableau, statistics"},
+    {n:"Applied Finance Certificate", school:"Cedarbrook College", state:"MA", lat:42.36, lon:-71.06, path:"Financial Analyst", dur:"3 quarters", cost:"$16,900", course:"Financial modeling, valuation"},
+    {n:"Computer Science Certificate", school:"Northgate State University", state:"IL", lat:41.88, lon:-87.63, path:"Software Developer", dur:"4 quarters", cost:"$19,200", course:"Python, data structures, systems"},
+    {n:"Business Analytics Certificate", school:"Prairie Crossing University", state:"TX", lat:32.78, lon:-96.80, path:"Financial Analyst", dur:"3 quarters", cost:"$15,600", course:"Excel, forecasting, reporting"},
+    {n:"Data Science ACP", school:"Sunridge College", state:"AZ", lat:33.45, lon:-112.07, path:"Data Analyst", dur:"2 quarters", cost:"$13,800", course:"Python, SQL, visualization"},
+    {n:"Applied Computing Certificate", school:"Bellwood University", state:"GA", lat:33.75, lon:-84.39, path:"Software Developer", dur:"4 quarters", cost:"$18,500", course:"Java, web development"},
+    {n:"Digital Marketing Certificate", school:"Oakstead Institute", state:"NJ", lat:40.74, lon:-74.17, path:"Marketing Analyst", dur:"2 quarters", cost:"$12,900", course:"Analytics, campaign strategy"},
+    {n:"Computer Science Certificate", school:"Fairmont State College", state:"WA", lat:47.61, lon:-122.33, path:"Software Developer", dur:"4 quarters", cost:"$20,100", course:"Algorithms, cloud systems"},
+    {n:"Business Administration ACP", school:"Ridgeline University", state:"CO", lat:39.74, lon:-104.99, path:"Management Consultant", dur:"3 quarters", cost:"$17,200", course:"Strategy, operations, case method"},
+    {n:"International Finance Certificate", school:"Copperfield College", state:"FL", lat:25.76, lon:-80.19, path:"Financial Analyst", dur:"3 quarters", cost:"$16,100", course:"Global markets, trade finance"}
+  ];
+  var JOBS = [
+    {co:"Contoso Analytics", state:"TX", lat:30.27, lon:-97.74, role:"Data Analyst", path:"Data Analyst", sponsor:true, filings:"19 certified filings, 2025"},
+    {co:"Northwind Systems", state:"CA", lat:37.77, lon:-122.42, role:"Software Developer", path:"Software Developer", sponsor:true, filings:"85 certified filings, 2025"},
+    {co:"Bluepeak Partners", state:"MA", lat:42.36, lon:-71.06, role:"Financial Analyst", path:"Financial Analyst", sponsor:true, filings:"40 certified filings, 2025"},
+    {co:"Fabrikam Cloud", state:"WA", lat:47.61, lon:-122.33, role:"Software Developer", path:"Software Developer", sponsor:true, filings:"62 certified filings, 2025"},
+    {co:"Halcyon Advisors", state:"IL", lat:41.88, lon:-87.63, role:"Management Consultant", path:"Management Consultant", sponsor:false, filings:null},
+    {co:"Cedarpoint Grocers", state:"TX", lat:32.78, lon:-96.80, role:"Data Analyst", path:"Data Analyst", sponsor:false, filings:null},
+    {co:"Meridian Capital", state:"NY", lat:40.71, lon:-74.01, role:"Financial Analyst", path:"Financial Analyst", sponsor:true, filings:"28 certified filings, 2025"},
+    {co:"Quillbright Media", state:"GA", lat:33.75, lon:-84.39, role:"Marketing Analyst", path:"Marketing Analyst", sponsor:false, filings:null},
+    {co:"Ironvale Defense Systems", state:"CO", lat:39.74, lon:-104.99, role:"Software Developer", path:"Software Developer", sponsor:true, filings:"15 certified filings, 2025"},
+    {co:"Sterling & Vance", state:"FL", lat:25.76, lon:-80.19, role:"Financial Analyst", path:"Financial Analyst", sponsor:true, filings:"22 certified filings, 2025"}
+  ];
+  var PATHS = ["Data Analyst","Financial Analyst","Software Developer","Marketing Analyst","Management Consultant"];
+  var STATES = ["CA","MA","IL","TX","AZ","GA","NJ","WA","CO","FL","NY"];
+
+  var map, layer, mode = "before", lookup = "path";
+  var mapReady = false;
+
+  function initMap(){
+    if (mapReady) return;
+    mapReady = true;
+    map = L.map('hiro-map', {zoomControl:true, scrollWheelZoom:false}).setView([39.5,-98.5], 4);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors', maxZoom: 19
+    }).addTo(map);
+    layer = L.layerGroup().addTo(map);
+    render();
+  }
+
+  function pinIcon(cls){
+    return L.divIcon({className:'', html:'<div class="lf-pin '+cls+'"></div>',
+      iconSize:[26,26], iconAnchor:[13,24], popupAnchor:[0,-24]});
+  }
+
+  function currentData(){
+    var d = mode === "before" ? PROGRAMS : JOBS;
+    var sel = document.getElementById('hiro-filter').value;
+    if (lookup === "path") return d.filter(function(x){ return x.path === sel; });
+    return d.filter(function(x){ return x.state === sel; });
+  }
+
+  function popupHtml(item){
+    if (mode === "before") {
+      return '<div class="hiro-popup"><h4>'+item.n+'</h4>'+
+        '<div class="pmeta">'+item.school+' &middot; '+item.state+'</div>'+
+        '<div class="prow">'+item.dur+' &middot; '+item.cost+'</div>'+
+        '<div class="prow">'+item.course+'</div>'+
+        '<div class="prow">Leads to: <strong>'+item.path+'</strong></div></div>';
+    }
+    var badge = item.sponsor
+      ? '<span class="badge-sponsor">&#10003; H-1B sponsor &middot; '+item.filings+'</span>'
+      : '<span class="badge-none">No certified H-1B filings on record</span>';
+    return '<div class="hiro-popup"><h4>'+item.co+'</h4>'+
+      '<div class="pmeta">'+item.role+' &middot; '+item.state+'</div>'+badge+'</div>';
+  }
+
+  function render(){
+    if (!mapReady) return;
+    layer.clearLayers();
+    var list = document.getElementById('hiro-list');
+    list.innerHTML = '';
+    var items = currentData();
+    var bounds = [];
+    items.forEach(function(item){
+      var cls = mode === "before" ? "school" : ("job" + (item.sponsor ? " sponsor" : ""));
+      var m = L.marker([item.lat, item.lon], {icon: pinIcon(cls)}).addTo(layer);
+      m.bindPopup(popupHtml(item));
+      bounds.push([item.lat, item.lon]);
+
+      var row = document.createElement('div');
+      row.className = 'map-list-item';
+      if (mode === "before") {
+        row.innerHTML = '<div class="name">'+item.n+'</div>'+
+          '<div class="meta">'+item.school+' &middot; '+item.state+'</div>'+
+          '<div class="meta">Leads to '+item.path+'</div>';
+      } else {
+        row.innerHTML = '<div class="name">'+item.co+'</div>'+
+          '<div class="meta">'+item.role+' &middot; '+item.state+'</div>'+
+          (item.sponsor ? '<div class="sponsor-yes">&#10003; H-1B sponsor</div>' : '<div class="sponsor-no">No certified filings</div>');
+      }
+      row.onclick = function(){ map.setView([item.lat, item.lon], 7); m.openPopup(); };
+      list.appendChild(row);
+    });
+    if (bounds.length) map.fitBounds(bounds, {padding:[30,30], maxZoom:6});
+  }
+
+  function fillFilter(){
+    var sel = document.getElementById('hiro-filter');
+    sel.innerHTML = '';
+    var opts = lookup === "path" ? PATHS : STATES;
+    opts.forEach(function(o){
+      var el = document.createElement('option'); el.value = o; el.textContent = o;
+      sel.appendChild(el);
+    });
+  }
+
+  window.hiroMapSetMode = function(m, btn){
+    mode = m;
+    document.querySelectorAll('.seg.mode button').forEach(function(b){b.classList.remove('active');});
+    btn.classList.add('active');
+    document.getElementById('hiro-gate').style.display = (m === "after") ? "flex" : "none";
+    initMap(); render();
+  };
+  window.hiroMapSetLookup = function(l, btn){
+    lookup = l;
+    document.querySelectorAll('.seg.lookup button').forEach(function(b){b.classList.remove('active');});
+    btn.classList.add('active');
+    fillFilter(); render();
+  };
+  window.hiroMapFilterChanged = function(){ render(); };
+
+  document.addEventListener('DOMContentLoaded', function(){
+    fillFilter();
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting) initMap(); });
+    }, {threshold: 0.2});
+    io.observe(document.getElementById('hiro-map'));
+  });
+})();
+</script>
+
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-row">
+    <a href="index.html" class="wordmark">hiro</a>
+    <ul class="nav-links"><a href="index.html">Overview</a><a href="students.html" aria-current="page">For students</a><a href="partners.html">For universities</a><a href="employers.html">For employers</a><a href="security.html">Security</a><a href="about.html">About</a></ul>
+    <div class="nav-cta">
+      <button class="icon-btn" onclick="hiroToggleTheme()" aria-label="Toggle dark mode" title="Toggle dark mode"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"/></svg></button>
+      <a href="early-access.html" class="btn btn-primary small">Get early access</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" style="padding-bottom:20px">
+  <div class="wrap">
+    <div class="eyebrow">For students</div>
+    <h1 style="max-width:22ch">See the whole path. <span style="color:var(--accent)">Before you decide anything.</span></h1>
+    <p class="sub">Everything below is what one profile does for you, from the first
+      search at home to asking your employer for sponsorship.</p>
+    <div class="hero-ctas"><a href="early-access.html" class="btn btn-primary">Get early access <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+  </div>
+</header>
+
+<section id="hiro-journey" class="on-surface">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Your journey, start to finish</div>
+      <h2>From choosing a program to asking for sponsorship.</h2>
+      <p>One continuous line. Nothing here is a separate app or a separate account, it's
+        the same profile the whole way through.</p>
+    </div>
+    <div class="tl-wrap"><div class="timeline">
+      <div class="tl-card top" style="grid-column:1;grid-row:1">
+        <div class="tl-persona">From home</div><div class="tl-title">Find your pathway</div>
+        <ul class="tl-points"><li>See every program you qualify for</li><li>Pick the role you're aiming at</li></ul>
+      </div>
+      <div class="tl-node student" style="grid-column:1">1</div>
+      <div class="tl-node student" style="grid-column:2">2</div>
+      <div class="tl-card bottom" style="grid-column:2;grid-row:3">
+        <div class="tl-persona">Applying</div><div class="tl-title">Apply, guided</div>
+        <ul class="tl-points"><li>Requirements matched against your documents</li><li>Handed off to the school to apply</li></ul>
+      </div>
+      <div class="tl-card top" style="grid-column:3;grid-row:1">
+        <div class="tl-persona">Enrolled</div><div class="tl-title">Build toward a role</div>
+        <ul class="tl-points"><li>Coursework matched to real listings</li><li>Skill gaps named, not guessed</li></ul>
+      </div>
+      <div class="tl-node student" style="grid-column:3">3</div>
+      <div class="tl-node professional" style="grid-column:4">4</div>
+      <div class="tl-card bottom" style="grid-column:4;grid-row:3">
+        <div class="tl-persona">Job search</div><div class="tl-title">Apply to who sponsors</div>
+        <ul class="tl-points"><li>Listings tagged by H-1B filing history</li><li>R&eacute;sum&eacute; and AI timeline, employer-visible</li></ul>
+      </div>
+      <div class="tl-card top" style="grid-column:5;grid-row:1">
+        <div class="tl-persona">Hired</div><div class="tl-title">Ask for sponsorship</div>
+        <ul class="tl-points"><li>Timeline, fees, how to show your value</li><li>Never odds, never a promise</li></ul>
+      </div>
+      <div class="tl-node professional" style="grid-column:5">5</div>
+      <div class="tl-line"></div>
+    </div></div>
+  </div>
+</section>
+
+
+<section class="map-section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">See it before you decide</div>
+      <h2>Try the map. This is what Hiro looks like from home.</h2>
+      <p>Illustrative data, built to show the shape of the tool, not real listings yet.
+        Look up a program by where you want to end up, or by where you want to be.</p>
+    </div>
+    <div class="map-card">
+      <div class="map-controls">
+        <div class="seg mode">
+          <button class="active" onclick="hiroMapSetMode('before', this)">Before enrollment</button>
+          <button onclick="hiroMapSetMode('after', this)">After enrollment</button>
+        </div>
+        <div class="seg lookup">
+          <button class="active" onclick="hiroMapSetLookup('path', this)">By career path</button>
+          <button onclick="hiroMapSetLookup('state', this)">By location</button>
+        </div>
+        <select id="hiro-filter" onchange="hiroMapFilterChanged()"></select>
+        <div class="spacer"></div>
+        <div class="gate-note" id="hiro-gate" style="display:none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10.5" width="16" height="10" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></svg> Real access opens once you're enrolled in a US program</div>
+      </div>
+      <div class="map-body">
+        <div id="hiro-map"></div>
+        <div class="map-list" id="hiro-list"></div>
+      </div>
+      <div class="map-foot">
+        <span>Navy pins: programs. Orange pins: employers. Green: verified H-1B sponsor.</span>
+        <span>Sponsor history from public USCIS disclosure data, illustrative here.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Two states, not three</div>
+      <h2>Before the program. After it.</h2>
+      <p>Everything from picking a program through being enrolled is one continuous
+        state. Once the program ends, the same profile carries straight into the job
+        search and the visa conversation.</p>
+    </div>
+    <div class="states">
+      <div class="state-card">
+        <div class="k">Student</div>
+        <h3>Before the program is done</h3>
+        <p>Upload what any international application already asks for, see every
+          program you qualify for, and see the ones your own school already has a
+          partnership with first. Once you're enrolled, the same profile starts
+          matching your coursework against real roles and real employers.</p>
+      </div>
+      <div class="state-card">
+        <div class="k">Professional</div>
+        <h3>Once the program is done</h3>
+        <p>R&eacute;sum&eacute; coaching, job listings ranked by how well you actually fit, and a
+          visa guide that shows dates, costs, and documents, never odds. The same
+          history that got you here follows you into the job search.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="on-surface">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">What Hiro actually does</div>
+      <h2>Six things, in order.</h2>
+      <p>Each one only exists because it removes a step someone was already doing by
+        hand, or produces a record that didn't exist before.</p>
+    </div>
+    <div class="grid-6">
+      <div class="feature"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7l10-4 10 4-10 4-10-4z"/><path d="M6 9.5V15c0 1.5 2.7 3 6 3s6-1.5 6-3V9.5"/><path d="M22 7v6"/></svg></div><h3>Programs you already qualify for</h3>
+        <p>Upload your test scores and documents once. See every program you're
+          eligible for, with the ones your own school partners with flagged first.</p>
+        <span class="tag">In-network &middot; requirements met</span></div>
+      <div class="feature"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2.3"/><circle cx="19" cy="18" r="2.3"/><path d="M5 8.3v3a3.7 3.7 0 0 0 3.7 3.7h6.6a3.7 3.7 0 0 1 3.7 3.7v0" stroke-dasharray="2.6 3.2"/></svg></div><h3>A pathway, not a maze</h3>
+        <p>Four routes, weighted equally: build a career here, keep studying, work
+          then go home, or finish with a certificate and go home.</p>
+        <span class="tag">Role-fit at a glance</span></div>
+      <div class="feature"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></div><h3>Career support once you're enrolled</h3>
+        <p>Your view changes to currently enrolled. Now it's company, role, and live
+          listings, matched against the skills and coursework you actually have.</p>
+        <span class="tag">Currently enrolled</span></div>
+      <div class="feature"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.8" fill="currentColor"/></svg></div><h3>Who actually sponsors</h3>
+        <p>Certified H-1B filings and OPT hiring history, pulled from public federal
+          records. Evidence a company has done it before, never a guarantee.</p>
+        <span class="tag">Public data, not a guess</span></div>
+      <div class="feature"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div><h3>A r&eacute;sum&eacute; and a timeline</h3>
+        <p>Coaching on the r&eacute;sum&eacute; itself, and an AI-built timeline from your own
+          experience, readable by the employer who's about to interview you.</p>
+        <span class="tag">Employer-visible</span></div>
+      <div class="feature"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l5-4 4 3 4-3 5 4"/><path d="M7 10l4 5 3-2"/><path d="M3 11l3 6 4 2"/><path d="M21 11l-3 6-4 2"/></svg></div><h3>Sponsorship, from both sides</h3>
+        <p>Your guide to asking: timeline, fees, how to show your value. Their
+          checklist to decide: cost to sponsor against cost to replace you.</p>
+        <span class="tag">Two clients, one decision</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="cta-band">
+      <div><h2>Plan it before you leave home.</h2><p>Early access opens as we bring the first partner schools on board.</p></div>
+      <a href="early-access.html" class="btn btn-primary">Get early access <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</section>
+
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="index.html" class="wordmark">hiro</a>
+        <p>The pathway platform for international students. One profile, from choosing a
+          program abroad to the job and the visa on the other side.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Product</h4>
+        <ul><li><a href="index.html">Overview</a></li><li><a href="students.html">For students</a></li></ul>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <ul><li><a href="about.html">About</a></li><li><a href="partners.html">For universities</a></li><li><a href="employers.html">For employers</a></li><li><a href="mailto:axel.martinez@livefresh.ai">Contact</a></li></ul>
+      </div>
+      <div class="foot-col">
+        <h4>Trust</h4>
+        <ul><li><a href="security.html">Security &amp; privacy</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p class="foot-legal">Hiro is a pathway and career-planning tool for international
+        students. Hiro is not an immigration attorney, a Designated School Official, or an
+        educational institution, and nothing on this site or in the app is legal,
+        immigration, or academic advice. Visa filing history, program requirements, and
+        sponsorship data shown are drawn from public records and documented school
+        requirements, never presented as a promise or a likelihood of any outcome. Confirm
+        eligibility, deadlines, and requirements with your school's DSO and, where
+        relevant, immigration counsel.</p>
+      <p class="foot-meta">&copy; 2026 Hiro, a Livefresh product &middot; prototype stage,
+        not yet available for download</p>
+    </div>
+  </div>
+</footer>
+<script>
+(function(){
+  var root = document.documentElement;
+  var stored = null;
+  try { stored = localStorage.getItem('hiro-theme'); } catch(e) {}
+  if (stored) root.setAttribute('data-theme', stored);
+  window.hiroToggleTheme = function(){
+    var cur = root.getAttribute('data-theme');
+    var next = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('hiro-theme', next); } catch(e) {}
+  };
+})();
+</script>
+</body>
+</html>

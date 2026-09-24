@@ -9,6 +9,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+.benefits { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:16px; overflow:hidden; margin-top: 8px; }
+.benefit-card { background:var(--surface); padding:34px 28px; display:flex; flex-direction:column; gap:12px; }
+.benefit-card .ic { width:40px; height:40px; border-radius:10px; background:var(--accent-soft); color:var(--accent-deep); display:flex; align-items:center; justify-content:center; }
+.benefit-card h3 { font-size:19px; }
+.benefit-card p { font-size:14.5px; color:var(--text-muted); line-height:1.55; flex:1; margin:0; }
+.benefit-card a.more { font-size:13.5px; font-weight:600; color:var(--accent-deep); text-decoration:none; display:inline-flex; align-items:center; gap:6px; margin-top:2px; }
+@media (max-width:900px) { .benefits { grid-template-columns:1fr; } }
+
 :root {
   --bg: #F8F7F4; --surface: #FFFFFF; --surface-2: #F1EEE7;
   --text: #1B2E4B; --text-muted: #51637C; --text-faint: #8A9BB0;
@@ -134,7 +142,7 @@ footer { border-top:1px solid var(--border); padding:56px 0 34px; }
 <nav class="nav">
   <div class="nav-row">
     <a href="index.html" class="wordmark">hiro</a>
-    <ul class="nav-links"><a href="index.html">Overview</a><a href="partners.html">For universities</a><a href="employers.html">For employers</a><a href="security.html" aria-current="page">Security</a><a href="about.html">About</a></ul>
+    <ul class="nav-links"><a href="index.html">Overview</a><a href="students.html">For students</a><a href="partners.html">For universities</a><a href="employers.html">For employers</a><a href="security.html" aria-current="page">Security</a><a href="about.html">About</a></ul>
     <div class="nav-cta">
       <button class="icon-btn" onclick="hiroToggleTheme()" aria-label="Toggle dark mode" title="Toggle dark mode"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"/></svg></button>
       <a href="early-access.html" class="btn btn-primary small">Get early access</a>
@@ -189,6 +197,7 @@ footer { border-top:1px solid var(--border); padding:56px 0 34px; }
 
 
 
+
 <footer>
   <div class="wrap">
     <div class="foot-grid">
@@ -199,7 +208,7 @@ footer { border-top:1px solid var(--border); padding:56px 0 34px; }
       </div>
       <div class="foot-col">
         <h4>Product</h4>
-        <ul><li><a href="index.html">Overview</a></li></ul>
+        <ul><li><a href="index.html">Overview</a></li><li><a href="students.html">For students</a></li></ul>
       </div>
       <div class="foot-col">
         <h4>Company</h4>
