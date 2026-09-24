@@ -244,6 +244,9 @@ footer { border-top:1px solid var(--border); padding:56px 0 34px; }
 .map-controls select { padding: 9px 14px; border-radius: 8px; border: 1px solid var(--border-strong);
   background: var(--surface); color: var(--text); font-size: 13.5px; font-family: inherit; }
 .map-controls .spacer { flex: 1; }
+.sponsor-toggle { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600;
+  color: var(--text-muted); cursor: pointer; user-select: none; }
+.sponsor-toggle input { accent-color: #14895C; width: 15px; height: 15px; cursor: pointer; }
 .gate-note { display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: var(--text-faint); }
 .map-body { display: grid; grid-template-columns: 1fr 300px; }
 #hiro-map { height: 440px; width: 100%; }
@@ -289,7 +292,19 @@ footer { border-top:1px solid var(--border); padding:56px 0 34px; }
     {n:"Digital Marketing Certificate", school:"Oakstead Institute", state:"NJ", lat:40.74, lon:-74.17, path:"Marketing Analyst", dur:"2 quarters", cost:"$12,900", course:"Analytics, campaign strategy"},
     {n:"Computer Science Certificate", school:"Fairmont State College", state:"WA", lat:47.61, lon:-122.33, path:"Software Developer", dur:"4 quarters", cost:"$20,100", course:"Algorithms, cloud systems"},
     {n:"Business Administration ACP", school:"Ridgeline University", state:"CO", lat:39.74, lon:-104.99, path:"Management Consultant", dur:"3 quarters", cost:"$17,200", course:"Strategy, operations, case method"},
-    {n:"International Finance Certificate", school:"Copperfield College", state:"FL", lat:25.76, lon:-80.19, path:"Financial Analyst", dur:"3 quarters", cost:"$16,100", course:"Global markets, trade finance"}
+    {n:"International Finance Certificate", school:"Copperfield College", state:"FL", lat:25.76, lon:-80.19, path:"Financial Analyst", dur:"3 quarters", cost:"$16,100", course:"Global markets, trade finance"},
+    {n:"Data Analytics Certificate", school:"Meadowlark College", state:"NY", lat:42.65, lon:-73.75, path:"Data Analyst", dur:"2 quarters", cost:"$15,100", course:"SQL, Python, dashboards"},
+    {n:"Software Engineering ACP", school:"Stonebridge University", state:"MA", lat:42.11, lon:-72.59, path:"Software Developer", dur:"4 quarters", cost:"$21,400", course:"Data structures, systems design"},
+    {n:"Applied Marketing Certificate", school:"Ashford Institute", state:"OH", lat:39.96, lon:-82.99, path:"Marketing Analyst", dur:"2 quarters", cost:"$11,800", course:"SEO, analytics, campaign strategy"},
+    {n:"Financial Analysis ACP", school:"Cliffside College", state:"PA", lat:39.95, lon:-75.16, path:"Financial Analyst", dur:"3 quarters", cost:"$16,400", course:"Valuation, forecasting, Excel modeling"},
+    {n:"Business Analytics ACP", school:"Elmwood State University", state:"MI", lat:42.73, lon:-84.55, path:"Data Analyst", dur:"2 quarters", cost:"$13,500", course:"Statistics, Power BI, SQL"},
+    {n:"Management Studies Certificate", school:"Birchgate College", state:"NC", lat:35.78, lon:-78.64, path:"Management Consultant", dur:"3 quarters", cost:"$17,900", course:"Operations, strategy, case studies"},
+    {n:"Applied Data Science Certificate", school:"Foxhollow Institute", state:"OR", lat:45.52, lon:-122.68, path:"Data Analyst", dur:"2 quarters", cost:"$14,700", course:"Python, machine learning basics, SQL"},
+    {n:"Computer Science ACP", school:"Wrenfield University", state:"VA", lat:37.54, lon:-77.44, path:"Software Developer", dur:"4 quarters", cost:"$19,900", course:"Algorithms, cloud, DevOps basics"},
+    {n:"Applied Finance Certificate", school:"Thornbury College", state:"TX", lat:29.76, lon:-95.37, path:"Financial Analyst", dur:"3 quarters", cost:"$15,900", course:"Corporate finance, Excel modeling"},
+    {n:"Digital Strategy Certificate", school:"Maple Ridge University", state:"MN", lat:44.98, lon:-93.27, path:"Marketing Analyst", dur:"2 quarters", cost:"$12,300", course:"Growth analytics, content strategy"},
+    {n:"Data Analytics ACP", school:"Silverpine Institute", state:"UT", lat:40.76, lon:-111.89, path:"Data Analyst", dur:"2 quarters", cost:"$13,200", course:"SQL, Tableau, statistics"},
+    {n:"Business Consulting Certificate", school:"Hawksmoor College", state:"WI", lat:43.07, lon:-89.40, path:"Management Consultant", dur:"3 quarters", cost:"$16,700", course:"Strategy, case method, analytics"}
   ];
   var JOBS = [
     {co:"Contoso Analytics", state:"TX", lat:30.27, lon:-97.74, role:"Data Analyst", path:"Data Analyst", sponsor:true, filings:"19 certified filings, 2025"},
@@ -301,10 +316,35 @@ footer { border-top:1px solid var(--border); padding:56px 0 34px; }
     {co:"Meridian Capital", state:"NY", lat:40.71, lon:-74.01, role:"Financial Analyst", path:"Financial Analyst", sponsor:true, filings:"28 certified filings, 2025"},
     {co:"Quillbright Media", state:"GA", lat:33.75, lon:-84.39, role:"Marketing Analyst", path:"Marketing Analyst", sponsor:false, filings:null},
     {co:"Ironvale Defense Systems", state:"CO", lat:39.74, lon:-104.99, role:"Software Developer", path:"Software Developer", sponsor:true, filings:"15 certified filings, 2025"},
-    {co:"Sterling & Vance", state:"FL", lat:25.76, lon:-80.19, role:"Financial Analyst", path:"Financial Analyst", sponsor:true, filings:"22 certified filings, 2025"}
+    {co:"Sterling & Vance", state:"FL", lat:25.76, lon:-80.19, role:"Financial Analyst", path:"Financial Analyst", sponsor:true, filings:"22 certified filings, 2025"},
+    {co:"Vantage Point Consulting", state:"NC", lat:35.78, lon:-78.64, role:"Management Consultant", path:"Management Consultant", sponsor:true, filings:"11 certified filings, 2025"},
+    {co:"Silverlake Robotics", state:"CA", lat:37.39, lon:-122.08, role:"Software Developer", path:"Software Developer", sponsor:true, filings:"47 certified filings, 2025"},
+    {co:"Thornfield Insurance", state:"OH", lat:39.96, lon:-82.99, role:"Financial Analyst", path:"Financial Analyst", sponsor:false, filings:null},
+    {co:"Bramblewood Retail", state:"MI", lat:42.73, lon:-84.55, role:"Marketing Analyst", path:"Marketing Analyst", sponsor:false, filings:null},
+    {co:"Kestrel Aerodynamics", state:"WA", lat:47.25, lon:-122.44, role:"Software Developer", path:"Software Developer", sponsor:true, filings:"33 certified filings, 2025"},
+    {co:"Marlow & Hitch", state:"NY", lat:40.76, lon:-73.98, role:"Management Consultant", path:"Management Consultant", sponsor:true, filings:"18 certified filings, 2025"},
+    {co:"Crestline Analytics", state:"VA", lat:38.88, lon:-77.10, role:"Data Analyst", path:"Data Analyst", sponsor:true, filings:"24 certified filings, 2025"},
+    {co:"Oakridge Financial", state:"PA", lat:39.95, lon:-75.16, role:"Financial Analyst", path:"Financial Analyst", sponsor:true, filings:"31 certified filings, 2025"},
+    {co:"Pinegate Software", state:"TX", lat:29.76, lon:-95.37, role:"Software Developer", path:"Software Developer", sponsor:false, filings:null},
+    {co:"Alderwood Health Systems", state:"MN", lat:44.98, lon:-93.27, role:"Data Analyst", path:"Data Analyst", sponsor:false, filings:null},
+    {co:"Briarcliff Logistics", state:"IL", lat:41.85, lon:-87.65, role:"Data Analyst", path:"Data Analyst", sponsor:true, filings:"9 certified filings, 2025"},
+    {co:"Summit Ridge Partners", state:"CO", lat:39.74, lon:-104.99, role:"Financial Analyst", path:"Financial Analyst", sponsor:false, filings:null},
+    {co:"Larkspur Digital", state:"OR", lat:45.52, lon:-122.68, role:"Marketing Analyst", path:"Marketing Analyst", sponsor:true, filings:"14 certified filings, 2025"},
+    {co:"Windmere Technologies", state:"UT", lat:40.76, lon:-111.89, role:"Software Developer", path:"Software Developer", sponsor:true, filings:"27 certified filings, 2025"},
+    {co:"Copper Hollow Foods", state:"WI", lat:43.07, lon:-89.40, role:"Marketing Analyst", path:"Marketing Analyst", sponsor:false, filings:null},
+    {co:"Ashgrove Manufacturing", state:"GA", lat:33.96, lon:-83.98, role:"Management Consultant", path:"Management Consultant", sponsor:false, filings:null},
+    {co:"Thistledown Media", state:"CA", lat:34.05, lon:-118.24, role:"Marketing Analyst", path:"Marketing Analyst", sponsor:true, filings:"12 certified filings, 2025"},
+    {co:"Ravensworth Capital", state:"MA", lat:42.37, lon:-71.10, role:"Financial Analyst", path:"Financial Analyst", sponsor:true, filings:"36 certified filings, 2025"},
+    {co:"Graystone Industries", state:"AZ", lat:33.45, lon:-112.07, role:"Data Analyst", path:"Data Analyst", sponsor:true, filings:"16 certified filings, 2025"},
+    {co:"Hollowbrook Systems", state:"WA", lat:47.61, lon:-122.33, role:"Software Developer", path:"Software Developer", sponsor:false, filings:null}
   ];
   var PATHS = ["Data Analyst","Financial Analyst","Software Developer","Marketing Analyst","Management Consultant"];
-  var STATES = ["CA","MA","IL","TX","AZ","GA","NJ","WA","CO","FL","NY"];
+  var STATES = ["CA","MA","IL","TX","AZ","GA","NJ","WA","CO","FL","NY","OH","PA","MI","NC","OR","VA","MN","UT","WI"];
+  function companyList(){
+    var names = JOBS.map(function(x){ return x.co; });
+    names.sort();
+    return names;
+  }
 
   var map, layer, mode = "before", lookup = "path";
   var mapReady = false;
@@ -328,8 +368,14 @@ footer { border-top:1px solid var(--border); padding:56px 0 34px; }
   function currentData(){
     var d = mode === "before" ? PROGRAMS : JOBS;
     var sel = document.getElementById('hiro-filter').value;
-    if (lookup === "path") return d.filter(function(x){ return x.path === sel; });
-    return d.filter(function(x){ return x.state === sel; });
+    if (lookup === "path") d = d.filter(function(x){ return x.path === sel; });
+    else if (lookup === "company") d = d.filter(function(x){ return x.co === sel; });
+    else d = d.filter(function(x){ return x.state === sel; });
+    if (mode === "after") {
+      var box = document.getElementById('hiro-sponsor-only');
+      if (box && box.checked) d = d.filter(function(x){ return x.sponsor; });
+    }
+    return d;
   }
 
   function popupHtml(item){
@@ -380,7 +426,7 @@ footer { border-top:1px solid var(--border); padding:56px 0 34px; }
   function fillFilter(){
     var sel = document.getElementById('hiro-filter');
     sel.innerHTML = '';
-    var opts = lookup === "path" ? PATHS : STATES;
+    var opts = lookup === "path" ? PATHS : (lookup === "company" ? companyList() : STATES);
     opts.forEach(function(o){
       var el = document.createElement('option'); el.value = o; el.textContent = o;
       sel.appendChild(el);
@@ -392,6 +438,15 @@ footer { border-top:1px solid var(--border); padding:56px 0 34px; }
     document.querySelectorAll('.seg.mode button').forEach(function(b){b.classList.remove('active');});
     btn.classList.add('active');
     document.getElementById('hiro-gate').style.display = (m === "after") ? "flex" : "none";
+    document.getElementById('hiro-lookup-company').style.display = (m === "after") ? "inline-block" : "none";
+    document.getElementById('hiro-sponsor-toggle').style.display = (m === "after") ? "inline-flex" : "none";
+    if (m === "before" && lookup === "company") {
+      lookup = "path";
+      document.querySelectorAll('.seg.lookup button').forEach(function(b){b.classList.remove('active');});
+      document.querySelector('.seg.lookup button[data-lookup="path"]').classList.add('active');
+      fillFilter();
+    }
+    if (m === "before") document.getElementById('hiro-sponsor-only').checked = false;
     initMap(); render();
   };
   window.hiroMapSetLookup = function(l, btn){
@@ -452,10 +507,14 @@ footer { border-top:1px solid var(--border); padding:56px 0 34px; }
           <button onclick="hiroMapSetMode('after', this)">After enrollment</button>
         </div>
         <div class="seg lookup">
-          <button class="active" onclick="hiroMapSetLookup('path', this)">By career path</button>
-          <button onclick="hiroMapSetLookup('state', this)">By location</button>
+          <button class="active" data-lookup="path" onclick="hiroMapSetLookup('path', this)">By career path</button>
+          <button data-lookup="state" onclick="hiroMapSetLookup('state', this)">By location</button>
+          <button id="hiro-lookup-company" data-lookup="company" onclick="hiroMapSetLookup('company', this)" style="display:none">By company</button>
         </div>
         <select id="hiro-filter" onchange="hiroMapFilterChanged()"></select>
+        <label class="sponsor-toggle" id="hiro-sponsor-toggle" style="display:none">
+          <input type="checkbox" id="hiro-sponsor-only" onchange="hiroMapFilterChanged()"> H-1B sponsors only
+        </label>
         <div class="spacer"></div>
         <div class="gate-note" id="hiro-gate" style="display:none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10.5" width="16" height="10" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></svg> Real access opens once you're enrolled in a US program</div>
       </div>
