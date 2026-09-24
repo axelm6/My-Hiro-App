@@ -4,11 +4,79 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For universities — Hiro</title>
-<meta name="description" content="Hiro sells the pathway, not the course: your program as the necessary step in a plan a student already committed to.">
+<meta name="description" content="Two things worth more than a listing: real enrollment data, and enrollments themselves. See the partner dashboard preview.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+/* ---- university dashboard preview ---- */
+.dash-card { background:var(--surface); border:1px solid var(--border); border-radius:16px;
+  overflow:hidden; box-shadow:var(--shadow); }
+.dash-head { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;
+  padding:16px 22px; border-bottom:1px solid var(--border); background:var(--surface-2); }
+.dash-head strong { font-family:Georgia,serif; font-size:15px; }
+.dash-head span { font-size:12px; color:var(--text-faint); }
+.dash-stats { display:grid; grid-template-columns:repeat(4,1fr); }
+.dash-stat { padding:22px; border-right:1px solid var(--border); border-bottom:1px solid var(--border); }
+.dash-stat:last-child { border-right:none; }
+.dash-stat .v { font-family:Georgia,serif; font-weight:700; font-size:30px; color:var(--text); }
+.dash-stat .l { font-size:12.5px; color:var(--text-muted); margin-top:4px; line-height:1.4; }
+.dash-body { display:grid; grid-template-columns:1.1fr 1fr; }
+.dash-programs { padding:20px 22px; border-right:1px solid var(--border); }
+.dash-programs h4 { font-size:12px; font-weight:700; letter-spacing:.05em; text-transform:uppercase;
+  color:var(--text-faint); margin:0 0 14px; }
+.dash-prow { display:flex; align-items:center; gap:12px; padding:8px 0; }
+.dash-prow .pname { flex:1; font-size:13.5px; color:var(--text); }
+.dash-prow .pbar { flex:1.4; height:6px; background:var(--surface-2); border-radius:4px; overflow:hidden; }
+.dash-prow .pbar i { display:block; height:100%; background:var(--accent); border-radius:4px; }
+.dash-prow .pn { font-size:12.5px; color:var(--text-faint); width:66px; text-align:right; }
+.dash-quote { padding:20px 22px; display:flex; flex-direction:column; justify-content:center; gap:10px; }
+.dash-quote .qtag { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--accent-deep); }
+.dash-quote p { font-family:Georgia,serif; font-size:16px; line-height:1.4; color:var(--text); margin:0; }
+.dash-quote .qn { font-size:12px; color:var(--text-faint); }
+.dash-foot { padding:14px 22px; border-top:1px solid var(--border); font-size:12.5px; color:var(--text-faint); }
+@media (max-width:760px) { .dash-stats{grid-template-columns:1fr 1fr} .dash-body{grid-template-columns:1fr} .dash-programs{border-right:none;border-bottom:1px solid var(--border)} }
+
+/* ---- employer talent pool preview ---- */
+.pool-card { background:var(--surface); border:1px solid var(--border); border-radius:16px;
+  overflow:hidden; box-shadow:var(--shadow); }
+.pool-head { padding:16px 22px; border-bottom:1px solid var(--border); background:var(--surface-2);
+  display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; }
+.pool-head strong { font-family:Georgia,serif; font-size:15px; }
+.pool-head span { font-size:12px; color:var(--text-faint); }
+.pool-row { display:flex; align-items:center; gap:16px; padding:16px 22px; border-bottom:1px solid var(--border); }
+.pool-row:last-child { border-bottom:none; }
+.pool-av { width:38px; height:38px; border-radius:50%; background:var(--surface-2); color:var(--text-faint);
+  display:flex; align-items:center; justify-content:center; flex:none; font-size:13px; font-weight:700; }
+.pool-main { flex:1; min-width:0; }
+.pool-main .role { font-size:14px; font-weight:600; color:var(--text); }
+.pool-main .meta { font-size:12.5px; color:var(--text-muted); margin-top:2px; }
+.pool-fit { display:flex; align-items:center; gap:6px; font-size:12px; font-weight:600; color:var(--accent-deep);
+  background:var(--accent-soft); padding:5px 11px; border-radius:999px; flex:none; white-space:nowrap; }
+.pool-tag { font-size:11.5px; color:var(--text-faint); flex:none; white-space:nowrap; }
+.pool-foot { padding:14px 22px; border-top:1px solid var(--border); font-size:12.5px; color:var(--text-faint); }
+
+/* ---- sponsor vs replace comparison ---- */
+.compare { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border);
+  border:1px solid var(--border); border-radius:16px; overflow:hidden; }
+.compare-col { background:var(--surface); padding:26px 26px 22px; display:flex; flex-direction:column; }
+.compare-col.win { background:var(--dark); }
+.compare-col.win * { color:#fff; }
+.compare-col .ctag { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--text-faint); }
+.compare-col.win .ctag { color:var(--accent); }
+.compare-col h3 { font-size:20px; margin-top:8px; }
+.compare-line { display:flex; justify-content:space-between; gap:10px; padding:10px 0; border-top:1px solid var(--border); font-size:13.5px; }
+.compare-col.win .compare-line { border-top-color:rgba(255,255,255,.14); }
+.compare-line:first-of-type { border-top:none; margin-top:14px; }
+.compare-line .lbl { color:var(--text-muted); }
+.compare-col.win .compare-line .lbl { color:#A3B3C6; }
+.compare-line .amt { font-weight:600; font-family:Georgia,serif; }
+.compare-total { display:flex; justify-content:space-between; gap:10px; margin-top:14px; padding-top:14px;
+  border-top:1px solid var(--border-strong); font-size:15px; font-weight:700; }
+.compare-col.win .compare-total { border-top-color:rgba(255,255,255,.25); }
+.compare-total .amt { font-family:Georgia,serif; color:var(--accent); font-size:22px; }
+@media (max-width:760px) { .compare { grid-template-columns:1fr; } }
+
 .benefits { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:16px; overflow:hidden; margin-top: 8px; }
 .benefit-card { background:var(--surface); padding:34px 28px; display:flex; flex-direction:column; gap:12px; }
 .benefit-card .ic { width:40px; height:40px; border-radius:10px; background:var(--accent-soft); color:var(--accent-deep); display:flex; align-items:center; justify-content:center; }
@@ -150,114 +218,93 @@ footer { border-top:1px solid var(--border); padding:56px 0 34px; }
   </div>
 </nav>
 
-<header class="hero">
+<header class="hero" style="padding-bottom:36px">
   <div class="wrap">
     <div class="eyebrow">For international programs offices</div>
-    <h1 style="max-width:20ch">You're not selling a course. You're the reason her plan works.</h1>
-    <p class="sub">She's not choosing a title on a catalog page. She's building a five-year
-      plan, and your program is one specific, necessary step in it. Hiro is where that
-      becomes visible.</p>
+    <h1 style="max-width:20ch">Two things worth more than a listing: data, and enrollments.</h1>
+    <p class="sub">She's not choosing a title on a catalog page, she's building a plan, and
+      your program is one necessary step in it. Below is what that's worth to you, not
+      just to her.</p>
     <div class="hero-ctas"><a href="mailto:axel.martinez@livefresh.ai" class="btn btn-primary">Talk to our partnerships team <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
   </div>
 </header>
 
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Illustrative preview</div>
+      <h2>What you'd actually see.</h2>
+      <p>Dummy numbers, built to show the shape of the report, not a claim about real
+        enrollment.</p>
+    </div>
+    <div class="dash-card">
+      <div class="dash-head"><strong>Partner dashboard &middot; Universidad Peruana de Ciencias Aplicadas</strong><span>Fall term &middot; illustrative</span></div>
+      <div class="dash-stats">
+        <div class="dash-stat"><div class="v">142</div><div class="l">Students who viewed your program this term</div></div>
+        <div class="dash-stat"><div class="v">38</div><div class="l">Auto-routed to your admissions inbox</div></div>
+        <div class="dash-stat"><div class="v">19</div><div class="l">Following, waiting on the next intake</div></div>
+        <div class="dash-stat"><div class="v">26</div><div class="l">Enrolled, sourced through Hiro</div></div>
+      </div>
+      <div class="dash-body">
+        <div class="dash-programs">
+          <h4>Interest by program</h4>
+          <div class="dash-prow"><span class="pname">Data Analytics ACP</span><span class="pbar"><i style="width:82%"></i></span><span class="pn">34 students</span></div>
+          <div class="dash-prow"><span class="pname">International Finance</span><span class="pbar"><i style="width:58%"></i></span><span class="pn">21 students</span></div>
+          <div class="dash-prow"><span class="pname">Digital Marketing</span><span class="pbar"><i style="width:44%"></i></span><span class="pn">16 students</span></div>
+          <div class="dash-prow"><span class="pname">Business Administration</span><span class="pbar"><i style="width:30%"></i></span><span class="pn">11 students</span></div>
+        </div>
+        <div class="dash-quote">
+          <div class="qtag">Ready to hand to your marketing team</div>
+          <p>&ldquo;47 students from Peru have enrolled in Data Analytics since 2024. 32 of
+            them are now working as data analysts in the US.&rdquo;</p>
+          <div class="qn">Every figure carries its own cohort size. Never a bare percentage.</div>
+        </div>
+      </div>
+      <div class="dash-foot">This is the record neither side can produce today, by name, by date, tied to the partner that sent them.</div>
+    </div>
+  </div>
+</section>
+
 <section class="on-surface">
   <div class="wrap">
     <div class="section-head">
-      <div class="eyebrow">The shift</div>
-      <h2>Same catalog. A completely different pitch.</h2>
-      <p>Illustrative, to show the shape of the idea, not a claim about a real student.</p>
+      <div class="eyebrow">What that data is actually for</div>
+      <h2>Enrollment, and proof you can hand to your next partner.</h2>
     </div>
-    <div class="states" style="grid-template-columns:1fr 1fr">
-      <div class="state-card">
-        <div class="k">What the catalog says today</div>
-        <h3 style="font-size:18px">"Accelerated Certificate, Data Analytics"</h3>
-        <p>One quarter. 15 units. Six courses. On campus, full time. Accurate, and it
-          answers a question she isn't asking yet.</p>
-      </div>
-      <div class="state-card">
-        <div class="k">What she's actually looking for</div>
-        <h3 style="font-size:18px">"I want to be a data analyst in the US."</h3>
-        <p>Your certificate is step two of a four-step plan she can already see, with
-          the certificate after it, the job after that, and the visa question after
-          that. Same program. She just knows why it matters now.</p>
-      </div>
+    <div class="grid-6" style="grid-template-columns:repeat(3,1fr)">
+      <div class="feature"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.8" fill="currentColor"/></svg></div><h3>She arrives already sold</h3>
+        <p>Your certificate shows up because it leads to the role she picked, not because
+          she found your catalog. In-network, badged, dated.</p></div>
+      <div class="feature"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M9.5 12h5M9.5 15.5h5"/></svg></div><h3>Stat cards, not a spreadsheet</h3>
+        <p>Brand-safe, shareable figures, generated from real outcomes, ready for your own
+          recruiting material.</p></div>
+      <div class="feature"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 4 6 4 9s-1.5 6.3-4 9c-2.5-2.7-4-6-4-9s1.5-6.3 4-9z"/></svg></div><h3>Leverage for the next partner</h3>
+        <p>Show a prospective partner abroad exactly what sending you students has
+          produced. That's a harder pitch to say no to.</p></div>
     </div>
   </div>
 </section>
 
 <section>
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">Illustrative example</div>
-      <h2>How a program becomes a milestone.</h2>
-    </div>
-    <div class="grid-6" style="grid-template-columns:repeat(3,1fr)">
-      <div class="feature"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.8" fill="currentColor"/></svg></div><h3>She picks the goal</h3>
-        <p>"Data Analyst" is what she's aiming at, not a school name. Hiro asks that first.</p></div>
-      <div class="feature"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7l10-4 10 4-10 4-10-4z"/><path d="M6 9.5V15c0 1.5 2.7 3 6 3s6-1.5 6-3V9.5"/><path d="M22 7v6"/></svg></div><h3>Your program is the how</h3>
-        <p>Your Data Analytics certificate shows up because it leads to that goal,
-          badged in-network because her home school partners with you.</p></div>
-      <div class="feature"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2.3"/><circle cx="19" cy="18" r="2.3"/><path d="M5 8.3v3a3.7 3.7 0 0 0 3.7 3.7h6.6a3.7 3.7 0 0 1 3.7 3.7v0" stroke-dasharray="2.6 3.2"/></svg></div><h3>The milestone is set</h3>
-        <p>Enroll here, this quarter, is now one dated step on a plan she already
-          committed to, not a cold decision.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="on-surface">
   <div class="wrap">
     <div class="section-head">
       <div class="eyebrow">The waterfall, both directions</div>
       <h2>Every partner you open makes the next one easier, on both sides of the ocean.</h2>
-      <p>This isn't one US school radiating out to its own partner list. A partner
-        abroad has its own US relationships too, so the network compounds from
-        whichever side opens next, not only from the first school that says yes.</p>
+      <p>Not one US school radiating out to its own list. A partner abroad has its own US
+        relationships too, so the network compounds from whichever side opens next.</p>
     </div>
-    <div class="grid-6" style="grid-template-columns:repeat(3,1fr)">
-      <div class="feature"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M9 14l-2 7 5-3 5 3-2-7"/></svg></div><h3>In-network, not just listed</h3>
-        <p>Your program shows first, and marked, to students at any school you already
-          partner with. Everyone else still sees it, just without the badge.</p></div>
-      <div class="feature"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M9.5 12h5M9.5 15.5h5"/></svg></div><h3>Outcomes you can hand back</h3>
-        <p>What happened to the students a partner sent you, by name and date.
-          Something neither side can produce today.</p></div>
-      <div class="feature"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 4 6 4 9s-1.5 6.3-4 9c-2.5-2.7-4-6-4-9s1.5-6.3 4-9z"/></svg></div><h3>Your admissions, unchanged</h3>
-        <p>Hiro hands off to your own site or your DSO to actually apply. Nothing about
-          your process moves.</p></div>
+    <div class="badge-row">
+      <span class="badge"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 7"/></svg> You lead every introduction</span>
+      <span class="badge"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 7"/></svg> Your admissions process, unchanged</span>
+      <span class="badge"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 7"/></svg> Hiro hands off to your site or your DSO</span>
     </div>
   </div>
 </section>
 
-<section>
-  <div class="wrap split">
-    <div>
-      <div class="eyebrow">What stays yours</div>
-      <h2>You lead every introduction. We supply the platform.</h2>
-      <p style="color:var(--text-muted);margin-top:14px;line-height:1.6">This isn't Hiro
-        becoming a recruitment agency. Your relationship, your brand, your academic
-        offer, all stay exactly where they are.</p>
-      <div class="badge-row">
-        <span class="badge"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 7"/></svg> You lead every introduction</span>
-        <span class="badge"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 7"/></svg> Your admissions process, unchanged</span>
-      </div>
-    </div>
-    <ul class="numbered">
-      <li><span class="n">01</span><div><h4>Give us one introduction</h4><p>A single
-        partner school abroad. You lead it, we build the material with you.</p></div></li>
-      <li><span class="n">02</span><div><h4>Students see you first</h4><p>In-network,
-        badged, with real requirements matched against what they've uploaded.</p></div></li>
-      <li><span class="n">03</span><div><h4>They apply through you</h4><p>Hiro hands off
-        to your site or your DSO. Nothing changes in how someone actually enrolls.</p></div></li>
-      <li><span class="n">04</span><div><h4>The web grows from there</h4><p>Their other
-        US partners, and your other partners abroad, become the next introduction.</p></div></li>
-    </ul>
-  </div>
-</section>
-
-<section>
+<section class="on-surface">
   <div class="wrap">
-    <div class="cta-band">
-      <div><h2>Start with one partner.</h2><p>The material built for the first one is the material for every one after it.</p></div>
+    <div class="cta-band" style="background:var(--surface);color:var(--text);border:1px solid var(--border)">
+      <div><h2 style="color:var(--text)">Start with one partner.</h2><p style="color:var(--text-muted)">The material built for the first one is the material for every one after it.</p></div>
       <a href="mailto:axel.martinez@livefresh.ai" class="btn btn-primary">Talk to our partnerships team <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
   </div>
