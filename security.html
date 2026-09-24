@@ -9,6 +9,74 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+/* ---- university dashboard preview ---- */
+.dash-card { background:var(--surface); border:1px solid var(--border); border-radius:16px;
+  overflow:hidden; box-shadow:var(--shadow); }
+.dash-head { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;
+  padding:16px 22px; border-bottom:1px solid var(--border); background:var(--surface-2); }
+.dash-head strong { font-family:Georgia,serif; font-size:15px; }
+.dash-head span { font-size:12px; color:var(--text-faint); }
+.dash-stats { display:grid; grid-template-columns:repeat(4,1fr); }
+.dash-stat { padding:22px; border-right:1px solid var(--border); border-bottom:1px solid var(--border); }
+.dash-stat:last-child { border-right:none; }
+.dash-stat .v { font-family:Georgia,serif; font-weight:700; font-size:30px; color:var(--text); }
+.dash-stat .l { font-size:12.5px; color:var(--text-muted); margin-top:4px; line-height:1.4; }
+.dash-body { display:grid; grid-template-columns:1.1fr 1fr; }
+.dash-programs { padding:20px 22px; border-right:1px solid var(--border); }
+.dash-programs h4 { font-size:12px; font-weight:700; letter-spacing:.05em; text-transform:uppercase;
+  color:var(--text-faint); margin:0 0 14px; }
+.dash-prow { display:flex; align-items:center; gap:12px; padding:8px 0; }
+.dash-prow .pname { flex:1; font-size:13.5px; color:var(--text); }
+.dash-prow .pbar { flex:1.4; height:6px; background:var(--surface-2); border-radius:4px; overflow:hidden; }
+.dash-prow .pbar i { display:block; height:100%; background:var(--accent); border-radius:4px; }
+.dash-prow .pn { font-size:12.5px; color:var(--text-faint); width:66px; text-align:right; }
+.dash-quote { padding:20px 22px; display:flex; flex-direction:column; justify-content:center; gap:10px; }
+.dash-quote .qtag { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--accent-deep); }
+.dash-quote p { font-family:Georgia,serif; font-size:16px; line-height:1.4; color:var(--text); margin:0; }
+.dash-quote .qn { font-size:12px; color:var(--text-faint); }
+.dash-foot { padding:14px 22px; border-top:1px solid var(--border); font-size:12.5px; color:var(--text-faint); }
+@media (max-width:760px) { .dash-stats{grid-template-columns:1fr 1fr} .dash-body{grid-template-columns:1fr} .dash-programs{border-right:none;border-bottom:1px solid var(--border)} }
+
+/* ---- employer talent pool preview ---- */
+.pool-card { background:var(--surface); border:1px solid var(--border); border-radius:16px;
+  overflow:hidden; box-shadow:var(--shadow); }
+.pool-head { padding:16px 22px; border-bottom:1px solid var(--border); background:var(--surface-2);
+  display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; }
+.pool-head strong { font-family:Georgia,serif; font-size:15px; }
+.pool-head span { font-size:12px; color:var(--text-faint); }
+.pool-row { display:flex; align-items:center; gap:16px; padding:16px 22px; border-bottom:1px solid var(--border); }
+.pool-row:last-child { border-bottom:none; }
+.pool-av { width:38px; height:38px; border-radius:50%; background:var(--surface-2); color:var(--text-faint);
+  display:flex; align-items:center; justify-content:center; flex:none; font-size:13px; font-weight:700; }
+.pool-main { flex:1; min-width:0; }
+.pool-main .role { font-size:14px; font-weight:600; color:var(--text); }
+.pool-main .meta { font-size:12.5px; color:var(--text-muted); margin-top:2px; }
+.pool-fit { display:flex; align-items:center; gap:6px; font-size:12px; font-weight:600; color:var(--accent-deep);
+  background:var(--accent-soft); padding:5px 11px; border-radius:999px; flex:none; white-space:nowrap; }
+.pool-tag { font-size:11.5px; color:var(--text-faint); flex:none; white-space:nowrap; }
+.pool-foot { padding:14px 22px; border-top:1px solid var(--border); font-size:12.5px; color:var(--text-faint); }
+
+/* ---- sponsor vs replace comparison ---- */
+.compare { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border);
+  border:1px solid var(--border); border-radius:16px; overflow:hidden; }
+.compare-col { background:var(--surface); padding:26px 26px 22px; display:flex; flex-direction:column; }
+.compare-col.win { background:var(--dark); }
+.compare-col.win * { color:#fff; }
+.compare-col .ctag { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--text-faint); }
+.compare-col.win .ctag { color:var(--accent); }
+.compare-col h3 { font-size:20px; margin-top:8px; }
+.compare-line { display:flex; justify-content:space-between; gap:10px; padding:10px 0; border-top:1px solid var(--border); font-size:13.5px; }
+.compare-col.win .compare-line { border-top-color:rgba(255,255,255,.14); }
+.compare-line:first-of-type { border-top:none; margin-top:14px; }
+.compare-line .lbl { color:var(--text-muted); }
+.compare-col.win .compare-line .lbl { color:#A3B3C6; }
+.compare-line .amt { font-weight:600; font-family:Georgia,serif; }
+.compare-total { display:flex; justify-content:space-between; gap:10px; margin-top:14px; padding-top:14px;
+  border-top:1px solid var(--border-strong); font-size:15px; font-weight:700; }
+.compare-col.win .compare-total { border-top-color:rgba(255,255,255,.25); }
+.compare-total .amt { font-family:Georgia,serif; color:var(--accent); font-size:22px; }
+@media (max-width:760px) { .compare { grid-template-columns:1fr; } }
+
 .benefits { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:16px; overflow:hidden; margin-top: 8px; }
 .benefit-card { background:var(--surface); padding:34px 28px; display:flex; flex-direction:column; gap:12px; }
 .benefit-card .ic { width:40px; height:40px; border-radius:10px; background:var(--accent-soft); color:var(--accent-deep); display:flex; align-items:center; justify-content:center; }
@@ -198,6 +266,7 @@ footer { border-top:1px solid var(--border); padding:56px 0 34px; }
 
 
 
+
 <footer>
   <div class="wrap">
     <div class="foot-grid">
@@ -212,7 +281,7 @@ footer { border-top:1px solid var(--border); padding:56px 0 34px; }
       </div>
       <div class="foot-col">
         <h4>Company</h4>
-        <ul><li><a href="about.html">About</a></li><li><a href="partners.html">For universities</a></li><li><a href="employers.html">For employers</a></li><li><a href="mailto:axel.martinez@livefresh.ai">Contact</a></li></ul>
+        <ul><li><a href="about.html">About</a></li><li><a href="partners.html">For universities</a></li><li><a href="employers.html">For employers</a></li><li><a href="mailto:axel.martinez@myhiroapp.com">Contact</a></li></ul>
       </div>
       <div class="foot-col">
         <h4>Trust</h4>
